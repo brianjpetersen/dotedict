@@ -11,15 +11,9 @@ try:
 except:
     readme = None
 
-try:
-    with open('VERSION.md') as f:
-        version = f.read()
-except:
-    version = None
-
 setuptools.setup(
     name = 'dotedict',
-    version = version,
+    version = '0.0.1',
     description = readme,
     author = 'Brian Petersen',
     author_email = 'brianjpetersen@gmail.com',
