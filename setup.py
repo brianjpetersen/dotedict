@@ -5,22 +5,23 @@ pass
 # first party libraries
 pass
 
-try:
-    with open('README.md', 'rb') as f:
-        readme = f.read()
-except:
-    readme = None
+def load_file(fname):
+    try:
+        with open(fname, 'rb') as f:
+            d = f.read()
+    except:
+        d = None
+    return d
 
-try:
-    with open('VERSION', 'rb') as f:
-        version = f.read()
-except:
-    version = None
+readme = load_file('README.md')
+version = load_file('VERSION.md')
+license = load_file('LICENSE.md')
 
 setuptools.setup(
-    name = 'dotedict',
+    name = 'tiny_id',
     version = version,
     description = readme,
+    license = license,
     author = 'Brian Petersen',
     author_email = 'brianjpetersen@gmail.com',
 )
