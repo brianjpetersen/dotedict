@@ -1,9 +1,14 @@
 # standard libraries
-pass
+import os
 # third party libraries
 pass
 # first party libraries
 pass
+
+_where = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(_where, '..', 'VERSION'), 'rb') as f:
+    __version__ = f.read()
 
 class DoteDict(dict):
     """ An autovivificious dictionary with attribute access to keys.  Makes a nice structure for trees.
@@ -64,14 +69,14 @@ class DoteDict(dict):
     """
     
     def __init__(self, *args, **kwargs):
-        super(TreeDict, self).__init__(*args, **kwargs)
+        super(DoteDict, self).__init__(*args, **kwargs)
         self.__treeify(self)
 
     def __treeify(self, obj):
         t = type(obj)
         if issubclass(t, dict):
-            if not issubclass(t, TreeDict):
-                obj = TreeDict(obj)
+            if not issubclass(t, DoteDict):
+                obj = DoteDict(obj)
             else:
                 for k, v in obj.iteritems():
                     obj[k] = self.__treeify(v)
@@ -83,7 +88,7 @@ class DoteDict(dict):
         return obj
 
     def __missing__(self, key):
-        self[key] = TreeDict()
+        self[key] = DoteDict()
         return self[key]
 
     def __getattr__(self, attribute):
@@ -93,8 +98,8 @@ class DoteDict(dict):
         self[attribute] = self.__treeify(value)
 
     def update(self, other):
-        other = TreeDict(other)
-        super(TreeDict, self).update(other)
+        other = DoteDict(other)
+        super(DoteDict, self).update(other)
 
 if __name__ == '__main__':
     import doctest

@@ -3,6 +3,6 @@ import doctest
 # third party libraries
 pass
 # first party libraries
-import dotedict.dotedict
+import dotedict
 
-doctest.testmod(dotedict.dotedict)
+doctest.testmod(dotedict)
