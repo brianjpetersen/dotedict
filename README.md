@@ -1,5 +1,4 @@
-dotedict
-========
+# dotedict
 
 An autovivificious dictionary with attribute access to keys.  Makes a nice structure for trees.
 
